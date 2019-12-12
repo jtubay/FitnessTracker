@@ -8,7 +8,7 @@ This simple app is meant to let the user store a work out session by name and li
 ## Link to displayed heroku site and repo:
 https://github.com/jtubay/FitnessTracker.git
 
-https://aqueous-fortress-43646.herokuapp.com/
+https://mighty-refuge-77397.herokuapp.com/
 
 
 
