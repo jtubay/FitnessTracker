@@ -8,7 +8,7 @@
         width: 40%;
         background-color: antiquewhite;
       }
-      #workingOn { float: left; }
+      #workingOn { margin: 0 auto;}
       #read { float: right; }
       table, td {
         border-width: 1px;
@@ -36,7 +36,26 @@
     </style>
   </head>
   <body>
-      {{{body}}}
+    <div id="wrapper">
+        <h1>Create a new workout!</h1>
+        <h2>Stay Fit!</h2>
+        <form action="userinput">
+            
+            <input type="text" id="title" placeholder="Your Name">
+            <br>
+            <input type="text" id="body" placeholder="The name of your session">
+            <br>
+            <input type="text" id="name" placeholder="Type of workout">
+            <br>
+            <button type="submit" id="addWorkout">Save your work out</button>
+        </form>
+        <div id="yourWorkout">
+            <h1>List of sessions!</h1>
+            <div id="workingOn">
+        
+            </div>
+        </div>
+    </div>
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="

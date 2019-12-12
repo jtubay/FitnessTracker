@@ -1,5 +1,4 @@
 const express = require("express");
-const exphbs = require("express-handlebars");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 
@@ -9,37 +8,52 @@ const db = require("./models");
 
 const app = express();
 
-
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
+app.use(logger("dev"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(logger("dev"));
+
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/myDatabase", { useNewUrlParser: true });
-app.get("/", (req, res) => {
-    res.render("index");
-});
-app.get("/continueWorkout", (req, res) => {
-    res.render("continueWorkout");
-});
-app.get("/newWorkout", (req, res) => {
-    res.render("newWorkout");
-});
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fitnessDB", { useNewUrlParser: true });
 
 
-app.post("/newWorkout", ({body}, res) => {
-    console.log(body);
-    db.Note.create(body)
-    .then((user) => {
-        console.log(user);
-      res.redirect("/continueWorkout");
+
+app.get("/notes", (req, res) => {
+  db.Note.find({})
+    .then(dbNote => {
+      res.json(dbNote);
+    })
+    .catch(err => {
+      res.json(err);
     });
-    //res.render("auth/register");
+});
+
+
+
+app.post("/submit", ({ body }, res) => {
+  db.Note.create(body)
+    .then(dbUser => {
+      res.json(dbUser);
+     
+    })
+    .catch(err => {
+      res.json(err);
+    });
+   
+});
+app.get("/workingOn", (req, res) => {
+    db.Note.find({}, (error, found) => {
+      if (error) {
+        console.log(error);
+      } else {
+        res.json(found);
+      }
+    });
   });
 
+
+// Start the server
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
 });

@@ -17,18 +17,18 @@ const NoteSchema = new Schema({
     title: {
         type: String,
         trim: true,
-        
+        required: "Please name your workout session"
     },
     body: {
         type: String,
         trim:  true,
-        
+        required: "Please insert your name"
     },
 
     name: {
         type: String,
         trim:  true,
-       
+        required: "Please insert your name"
     }
 })
 
